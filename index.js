@@ -10,6 +10,7 @@ function arrayStyleType (styleType) {
 module.exports = function (babel) {
   var className = null
   var style = null
+  var uniqueKey = null
   var t = babel.types
 
   function styleInSingleExpression (exp) {
@@ -19,7 +20,7 @@ module.exports = function (babel) {
     }
 
     if (t.isMemberExpression(exp)) {
-      console.log('identifier', exp)
+
       // this.props.style
       if (t.isMemberExpression(exp.object)) {
         var thisProps = exp.object
@@ -74,57 +75,65 @@ module.exports = function (babel) {
         exit (path) {
           if (
             style !== null &&
-            className === null &&
             t.isJSXExpressionContainer(style.node.value)
           ) {
             var styleType = doesPassStyle(path)
             if (styleType) {
-              console.log('styleType', styleType)
-              // path.node.attributes.push(t.JSXAttribute(
-              //   t.JSXIdentifier('className'),
-              //   t.JSXExpressionContainer(
-              //     t.identifier('className')
-              //   )
-              // ))
 
               // Find the closest function declaration
               var functionPath = path.parentPath
               while (functionPath && !isFunction(functionPath.node)) functionPath = functionPath.parentPath
               var propsParam = functionPath && functionPath.node && functionPath.node.params && functionPath.node.params[0]
+              var expression
               if (propsParam && t.isIdentifier(propsParam)) {
                 // Probably functional expression, take from first argument
-                path.node.attributes.push(t.JSXAttribute(
-                  t.JSXIdentifier('className'),
-                  t.JSXExpressionContainer(
-                    t.logicalExpression('&&',
-                      propsParam,
-                      t.memberExpression(
-                        propsParam,
-                        t.identifier('className')
-                      )
-                    )
+                expression = t.logicalExpression('&&',
+                  propsParam,
+                  t.memberExpression(
+                    propsParam,
+                    t.identifier('className')
                   )
-                ))
+                )
               } else {
                 // Probably part of render () function, take from this
+                expression = t.logicalExpression('&&',
+                  t.thisExpression(),
+                  t.logicalExpression('&&',
+                    t.memberExpression(t.thisExpression(), t.identifier('props')),
+                    t.memberExpression(t.memberExpression(t.thisExpression(), t.identifier('props')), t.identifier('className'))
+                  )
+                )
+              }
+
+              // Create a new expression if doesn't exist
+              if (className === null) {
                 path.node.attributes.push(t.JSXAttribute(
                   t.JSXIdentifier('className'),
-                  t.JSXExpressionContainer(
-                    t.logicalExpression('&&',
-                      t.thisExpression(),
-                      t.logicalExpression('&&',
-                        t.memberExpression(t.thisExpression(), t.identifier('props')),
-                        t.memberExpression(t.memberExpression(t.thisExpression(), t.identifier('props')), t.identifier('className'))
-                      )
-                    )
-                  )
+                  t.JSXExpressionContainer(expression)
                 ))
+
+              // Or add into an existing one as `(x || '') + ' ' + className`
+              } else {
+                var existingExpression
+
+                if (t.isStringLiteral(className.node.value)) {
+                  existingExpression = className.node.value
+                } else if (t.isJSXExpressionContainer(className.node.value)) {
+                  existingExpression = className.node.value.expression
+                }
+
+                var safeExpression = t.logicalExpression('||', existingExpression, t.stringLiteral(''))
+                var plusSpace = t.binaryExpression('+', safeExpression, t.stringLiteral(' '))
+                var plusClassName = t.binaryExpression('+', plusSpace, expression)
+
+                className.node.value = plusClassName
               }
             }
           }
 
           className = null
           style = null
+          uniqueKey = null
         }
       },
       JSXAttribute: function (path) {
@@ -133,6 +142,8 @@ module.exports = function (babel) {
           className = path
         } else if (name === 'style') {
           style = path
+        } else if (name === 'uniqueKey') {
+          uniqueKey = true
         }
       }
     }

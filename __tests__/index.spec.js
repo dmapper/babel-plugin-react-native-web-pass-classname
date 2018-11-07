@@ -51,12 +51,6 @@ pluginTester({
       `
     },
     {
-      title: '[fn] should ignore if className is already present',
-      code: `
-        const Foo = ({style, className}) => <View style={style} className='hello' />
-      `
-    },
-    {
       title: '[class] plain',
       code: `
         class Foo {
@@ -73,11 +67,11 @@ pluginTester({
       title: '[class] this.props.style',
       code: `
         class Foo {
-          render () {            
-            return (              
+          render () {
+            return (
               <View style={this.props.style} />
             )
-          }          
+          }
         }
       `
     },
@@ -85,12 +79,24 @@ pluginTester({
       title: '[class] array this.props.style',
       code: `
         class Foo {
-          render () {            
-            return (              
+          render () {
+            return (
               <View style={[this.props.titleStyle, this.props.style]} />
             )
-          }          
+          }
         }
+      `
+    },
+    {
+      title: '[fn] existing className as string',
+      code: `
+        const Foo = ({style}) => <View style={style} className='foobar' />
+      `
+    },
+    {
+      title: '[fn] existing className as expression',
+      code: `
+        const Foo = ({style}) => <View style={style} className={_getClassName('foobar')} />
       `
     }
   ]

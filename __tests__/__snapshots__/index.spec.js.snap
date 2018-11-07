@@ -3,11 +3,11 @@
 exports[`babel-plugin-react-native-pass-classname [class] array this.props.style: [class] array this.props.style 1`] = `
 "
 class Foo {
-  render () {            
-    return (              
+  render () {
+    return (
       <View style={[this.props.titleStyle, this.props.style]} />
     )
-  }          
+  }
 }
 
       ↓ ↓ ↓ ↓ ↓ ↓
@@ -89,11 +89,11 @@ function () {
 exports[`babel-plugin-react-native-pass-classname [class] this.props.style: [class] this.props.style 1`] = `
 "
 class Foo {
-  render () {            
-    return (              
+  render () {
+    return (
       <View style={this.props.style} />
     )
-  }          
+  }
 }
 
       ↓ ↓ ↓ ↓ ↓ ↓
@@ -159,6 +159,42 @@ var Foo = function Foo(_ref) {
   return React.createElement(View, {
     style: style,
     className: _ref && _ref.className
+  });
+};
+"
+`;
+
+exports[`babel-plugin-react-native-pass-classname [fn] existing className as expression: [fn] existing className as expression 1`] = `
+"
+const Foo = ({style}) => <View style={style} className={_getClassName('foobar')} />
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+\\"use strict\\";
+
+var Foo = function Foo(_ref) {
+  var style = _ref.style;
+  return React.createElement(View, {
+    style: style,
+    className: (_getClassName('foobar') || \\"\\") + \\" \\" + (_ref && _ref.className)
+  });
+};
+"
+`;
+
+exports[`babel-plugin-react-native-pass-classname [fn] existing className as string: [fn] existing className as string 1`] = `
+"
+const Foo = ({style}) => <View style={style} className='foobar' />
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+\\"use strict\\";
+
+var Foo = function Foo(_ref) {
+  var style = _ref.style;
+  return React.createElement(View, {
+    style: style,
+    className: ('foobar' || \\"\\") + \\" \\" + (_ref && _ref.className)
   });
 };
 "
@@ -249,25 +285,6 @@ var Foo = function Foo(_ref) {
   return React.createElement(View, {
     style: style,
     className: _ref && _ref.className
-  });
-};
-"
-`;
-
-exports[`babel-plugin-react-native-pass-classname [fn] should ignore if className is already present: [fn] should ignore if className is already present 1`] = `
-"
-const Foo = ({style, className}) => <View style={style} className='hello' />
-
-      ↓ ↓ ↓ ↓ ↓ ↓
-
-\\"use strict\\";
-
-var Foo = function Foo(_ref) {
-  var style = _ref.style,
-      className = _ref.className;
-  return React.createElement(View, {
-    style: style,
-    className: \\"hello\\"
   });
 };
 "
