@@ -1,0 +1,274 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`babel-plugin-react-native-pass-classname [class] array this.props.style: [class] array this.props.style 1`] = `
+"
+class Foo {
+  render () {            
+    return (              
+      <View style={[this.props.titleStyle, this.props.style]} />
+    )
+  }          
+}
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+\\"use strict\\";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\\"Cannot call a class as a function\\"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\\"value\\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Foo =
+/*#__PURE__*/
+function () {
+  function Foo() {
+    _classCallCheck(this, Foo);
+  }
+
+  _createClass(Foo, [{
+    key: \\"render\\",
+    value: function render() {
+      return React.createElement(View, {
+        style: [this.props.titleStyle, this.props.style],
+        className: this && this.props && this.props.className
+      });
+    }
+  }]);
+
+  return Foo;
+}();
+"
+`;
+
+exports[`babel-plugin-react-native-pass-classname [class] plain: [class] plain 1`] = `
+"
+class Foo {
+  render () {
+    let {style} = this.props
+    return (
+      <View style={style} />
+    )
+  }
+}
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+\\"use strict\\";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\\"Cannot call a class as a function\\"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\\"value\\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Foo =
+/*#__PURE__*/
+function () {
+  function Foo() {
+    _classCallCheck(this, Foo);
+  }
+
+  _createClass(Foo, [{
+    key: \\"render\\",
+    value: function render() {
+      var style = this.props.style;
+      return React.createElement(View, {
+        style: style,
+        className: this && this.props && this.props.className
+      });
+    }
+  }]);
+
+  return Foo;
+}();
+"
+`;
+
+exports[`babel-plugin-react-native-pass-classname [class] this.props.style: [class] this.props.style 1`] = `
+"
+class Foo {
+  render () {            
+    return (              
+      <View style={this.props.style} />
+    )
+  }          
+}
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+\\"use strict\\";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\\"Cannot call a class as a function\\"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\\"value\\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Foo =
+/*#__PURE__*/
+function () {
+  function Foo() {
+    _classCallCheck(this, Foo);
+  }
+
+  _createClass(Foo, [{
+    key: \\"render\\",
+    value: function render() {
+      return React.createElement(View, {
+        style: this.props.style,
+        className: this && this.props && this.props.className
+      });
+    }
+  }]);
+
+  return Foo;
+}();
+"
+`;
+
+exports[`babel-plugin-react-native-pass-classname [fn classic w/ name] plain: [fn classic w/ name] plain 1`] = `
+"
+function Foo ({style}) { return <View style={style} /> }
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+\\"use strict\\";
+
+function Foo(_ref) {
+  var style = _ref.style;
+  return React.createElement(View, {
+    style: style,
+    className: _ref && _ref.className
+  });
+}
+"
+`;
+
+exports[`babel-plugin-react-native-pass-classname [fn classic] plain: [fn classic] plain 1`] = `
+"
+const Foo = function ({style}) { return <View style={style} /> }
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+\\"use strict\\";
+
+var Foo = function Foo(_ref) {
+  var style = _ref.style;
+  return React.createElement(View, {
+    style: style,
+    className: _ref && _ref.className
+  });
+};
+"
+`;
+
+exports[`babel-plugin-react-native-pass-classname [fn] from props in array: [fn] from props in array 1`] = `
+"
+const Foo = ({titleStyle, ...props}) => <View style={[titleStyle, props.style]} {...props} />
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+\\"use strict\\";
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+var Foo = function Foo(_ref) {
+  var titleStyle = _ref.titleStyle,
+      props = _objectWithoutProperties(_ref, [\\"titleStyle\\"]);
+
+  return React.createElement(View, _extends({
+    style: [titleStyle, props.style]
+  }, props, {
+    className: _ref && _ref.className
+  }));
+};
+"
+`;
+
+exports[`babel-plugin-react-native-pass-classname [fn] from props: [fn] from props 1`] = `
+"
+const Foo = (props) => <View style={props.style} />
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+\\"use strict\\";
+
+var Foo = function Foo(props) {
+  return React.createElement(View, {
+    style: props.style,
+    className: props && props.className
+  });
+};
+"
+`;
+
+exports[`babel-plugin-react-native-pass-classname [fn] plain in array: [fn] plain in array 1`] = `
+"
+const Foo = ({style, titleStyle, ...props}) => <View style={[titleStyle, style]} {...props} />
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+\\"use strict\\";
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+var Foo = function Foo(_ref) {
+  var style = _ref.style,
+      titleStyle = _ref.titleStyle,
+      props = _objectWithoutProperties(_ref, [\\"style\\", \\"titleStyle\\"]);
+
+  return React.createElement(View, _extends({
+    style: [titleStyle, style]
+  }, props, {
+    className: _ref && _ref.className
+  }));
+};
+"
+`;
+
+exports[`babel-plugin-react-native-pass-classname [fn] plain: [fn] plain 1`] = `
+"
+const Foo = ({style}) => <View style={style} />
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+\\"use strict\\";
+
+var Foo = function Foo(_ref) {
+  var style = _ref.style;
+  return React.createElement(View, {
+    style: style,
+    className: _ref && _ref.className
+  });
+};
+"
+`;
+
+exports[`babel-plugin-react-native-pass-classname [fn] should ignore if className is already present: [fn] should ignore if className is already present 1`] = `
+"
+const Foo = ({style, className}) => <View style={style} className='hello' />
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+\\"use strict\\";
+
+var Foo = function Foo(_ref) {
+  var style = _ref.style,
+      className = _ref.className;
+  return React.createElement(View, {
+    style: style,
+    className: \\"hello\\"
+  });
+};
+"
+`;

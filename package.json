@@ -1,0 +1,92 @@
+{
+  "name": "babel-plugin-react-native-web-pass-classname",
+  "version": "0.1.0",
+  "description": "[react-native-web] Pass className property when style property is passed.",
+  "keywords": [
+    "babel",
+    "babel-plugin",
+    "react-native",
+    "stylename",
+    "style",
+    "classname",
+    "react-native",
+    "react-native-web"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "release": "npmpub",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "author": "Pavel Zhukov",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dmapper/babel-plugin-react-native-web-pass-classname"
+  },
+  "files": [
+    "CHANGELOG.md",
+    "index.js",
+    "README.md"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/template": "^7.1.2",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-plugin-tester": "^5.0.0",
+    "coveralls": "^3.0.0",
+    "eslint": "^4.17.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^6.0.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "jest": "^23.6.0",
+    "jest-cli": "^23.6.0",
+    "lint-staged": "^7.0.0",
+    "npmpub": "^3.1.0",
+    "prettier": "^1.10.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "standard",
+    "env": {
+      "jest": true
+    }
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "none"
+  },
+  "jest": {
+    "coverageDirectory": "./.coverage/",
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 75,
+        "functions": 75,
+        "lines": 75,
+        "statements": 75
+      }
+    }
+  }
+}
