@@ -10,7 +10,6 @@ function arrayStyleType (styleType) {
 module.exports = function (babel) {
   var className = null
   var style = null
-  var uniqueKey = null
   var t = babel.types
 
   function styleInSingleExpression (exp) {
@@ -41,9 +40,8 @@ module.exports = function (babel) {
   }
 
   function doesPassStyle (path) {
-    // console.log(expression)
     if (style.parentPath.node !== path.node) return false
-    // console.log('style', style.node.value.expression)
+
     var exp = style.node.value.expression
 
     // 1) Either the style is passed through with 'style' or 'props.style'
@@ -133,7 +131,6 @@ module.exports = function (babel) {
 
           className = null
           style = null
-          uniqueKey = null
         }
       },
       JSXAttribute: function (path) {
@@ -142,8 +139,6 @@ module.exports = function (babel) {
           className = path
         } else if (name === 'style') {
           style = path
-        } else if (name === 'uniqueKey') {
-          uniqueKey = true
         }
       }
     }
